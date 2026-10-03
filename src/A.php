@@ -4,6 +4,6 @@ namespace App;
 
 class A {
 	public function __construct() {
-		echo 'class app A<br>';
+		echo 'hello from A<br>';
 	}
 }
