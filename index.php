@@ -1,5 +1,7 @@
 <?php
 
+
+
 use App\models\User;
 
 require __DIR__ . '/vendor/autoload.php';
@@ -16,7 +18,7 @@ $db = new \App\DB(
 	],
 );
 
-$result = $db->query('
+$result = $db->query(/* mysql */'
     SELECT * FROM users u
     WHERE u.username = "Alina";
 ');

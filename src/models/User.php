@@ -1,21 +1,48 @@
 <?php
-
 namespace App\models;
 
+declare(strict_types=1);
+
 /**
+ * Возвращает то же значение
  * 
- * @param int $one -- description
- * 
- * @return void
+ * @template T
+ * @param T $var
+ * @return T
  */
-function some(int $one) {
-	echo $one;
+function my(mixed $var): mixed {
+	return $var;
 }
 
-some(1);
+/**
+ * This is a summation function
+ * 
+ * @param int $one -- first number to summation
+ * @param int $two -- second number to summation
+ */
+function sum($one, $two): int {
+	$res = my($one + $two);
+	return $res;
+}
 
+sum(1, 2);
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 class User {
+	static $users = [];
+
 	public function __construct() {
-		$this->__construct();
+		$this->__construct(); // __construct
+	}
+	public function create() {
+		self::$users[] = $this;
 	}
 }
+
+
+
