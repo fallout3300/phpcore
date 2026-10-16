@@ -1,0 +1,4 @@
+@baseUrl = http://phpcore-production.up.railway.app:8080
+
+### Main
+GET {{baseUrl}}
