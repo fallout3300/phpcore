@@ -9,5 +9,6 @@
 	</head>
 	<body>
 		<h1>hello world! - /</h1>
+		<p>1 + 1 = <?php echo 1 + 1; ?></p>
 	</body>
 </html>
