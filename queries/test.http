@@ -1,0 +1,36 @@
+@baseUrl = http://my-app.local
+
+### main
+GET {{baseUrl}}/json HTTP/1.1
+Cookie: PHPSESSID=123
+Content-Type: application/json
+
+{
+	"name": "Иван Иванов",
+	"email": "ivan@example.com",
+	"role": "admin",
+	"age": 25
+}
+### second
+### home
+# @no-cookie-jar
+POST {{baseUrl}} HTTP/1.1
+Cookie: PHPSESSID=193
+Content-Type: application/x-www-form-urlencoded
+
+username=ivan&
+password=secret&
+some=new
+### html
+GET {{baseUrl}}/html HTTP/1.1
+### routes
+# @prompt method "Enter sort: path | method | raw"
+GET {{baseUrl}}/routes?sort={{method}} HTTP/1.1
+### set cookie
+POST {{baseUrl}}/cookie HTTP/1.1
+### see cookie
+# @attach-cookie-jar
+GET  {{baseUrl}}/cookie HTTP/1.1
+### 404
+# @curl-location
+GET {{baseUrl}}/404 HTTP/1.1

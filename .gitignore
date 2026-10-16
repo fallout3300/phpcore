@@ -1,4 +1,3 @@
 .php-cs-fixer.cache
 vendor/*
 .env
-*.otter.*

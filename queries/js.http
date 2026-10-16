@@ -1,0 +1,39 @@
+### 1. Запрос на авторизацию (Генерация данных и чтение ответа)
+# Pre-request: Генерируем timestamp перед отправкой
+< {%
+    const timestamp = Date.now().toString()
+    client.global.set('generated_timestamp', timestamp)
+    // Вывод в лог kulala
+    client.log('Генерируем timestamp для запроса: ' + timestamp)
+%}
+POST https://httpbin.org/post
+Content-Type: application/json
+X-Request-Timestamp: {{generated_timestamp}}
+
+{
+    "user": "admin",
+    "password": "secret_password",
+    "mock_token": "bearer_token_xyz_12345"
+}
+# Post-request: Обрабатываем ответ сервера
+> {%
+    // 1. Проверяем статус ответа
+    client.test('Статус ответа 200 OK', function () {
+    	client.assert(response.status === 200, 'Сервер вернул ошибку: ' + response.status)
+    })
+
+    // 2. Парсим JSON из ответа httpbin (он возвращает переданный body в ключе 'json')
+    const responseData = JSON.parse(response.body)
+    const receivedToken = responseData.json.mock_token
+
+    // 3. Сохраняем токен в глобальные переменные
+    client.global.set('auth_token', receivedToken)
+    client.log('Токен успешно сохранен в переменные: ' + receivedToken)
+%}
+
+
+### 2. Следующий запрос (Использование сохраненного токена)
+# Этот запрос автоматически подставит токен, полученный выше
+GET https://httpbin.org
+Authorization: Bearer {{auth_token}}
+Accept: application/json
